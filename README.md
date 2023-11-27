@@ -7,3 +7,4 @@ app hecho en react
 3. release
 4. Develop
 5. Feature
+6. xd
