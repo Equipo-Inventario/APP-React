@@ -5,7 +5,7 @@ function Notifications() {
   const [stock, setStock] = useState({ mensaje: '', valor: 0 });
 
   useEffect(() => {
-    const socket = socketIOClient('http://192.168.213.87:5000'); 
+    const socket = socketIOClient('http://192.168.1.207:5000'); 
 
     socket.on('message', (data) => {
       setStock(data);
