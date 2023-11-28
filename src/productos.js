@@ -1,23 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-function ProductStock() {
+function ProductStock({ token }) {
   const [stock, setStock] = useState(0);
 
   useEffect(() => {
-    // Realiza una solicitud HTTP para obtener el stock inicial
-    axios.get('http://192.168.213.87:5000/productos_stock')
+    // Include the token in the request headers
+    axios.get('http://192.168.22.24:5000/productos_stock', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
       .then((response) => {
         setStock(response.data.producto_stock);
       })
       .catch((error) => {
         console.error('Error al obtener el stock: ' + error);
       });
-  }, []);
+  }, [token]);
 
   // Función para actualizar el stock
   const actualizarStock = () => {
-    axios.post('http://192.168.213.87:5000/actualizar_stock')
+    axios.post('http://192.168.22.24:5000/actualizar_stock')
       .then((response) => {
         if (response.data.success) {
           setStock(response.data.nuevo_stock);
@@ -29,7 +31,7 @@ function ProductStock() {
       })
       .catch((error) => {
         console.error('Error al actualizar el stock: ' + error);
-        
+
       });
   };
 
